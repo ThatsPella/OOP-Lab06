@@ -23,5 +23,27 @@ public final class TestStrictBankAccount {
          * presenza di un id utente errato, oppure al superamento del numero di
          * operazioni ATM gratuite.
          */
+    	
+    	StrictBankAccount b1 = new StrictBankAccount(1, 10000, 10);
+    	
+    	try {
+    		b1.withdraw(1, 10001);
+    	}catch(NotEnoughFoundsException e) {
+    		System.out.println(e.getMessage());
+    	}
+    	
+    	try {
+    		b1.withdraw(2, 15);
+    	}catch(WrongAccountHolderException e) {
+    		System.out.println(e.getMessage());
+    	}
+    	
+    	try {
+    		for(int i = 0; i < 20; i++) {
+    			b1.withdrawFromATM(1, 15);
+    		}
+    	}catch(TransactionsOverQuotaException e) {
+    		System.out.println(e.getMessage());
+    	}
     }
 }
